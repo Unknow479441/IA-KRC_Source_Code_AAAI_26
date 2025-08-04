@@ -1,0 +1,95 @@
+self_play: true
+enemy_mac: "comm_mac_sp"
+mac: "comm_mac"
+train_enemy: true
+name: "IA-KRC"
+
+action_selector: "epsilon_greedy"
+epsilon_start: 1.00
+epsilon_finish: 0.05
+epsilon_anneal_time: 500000
+runner: "parallel"
+batch_size_run: 1
+training_iters: 8
+entity_last_action: True
+
+buffer_size: 5000
+
+target_update_interval: 200
+
+agent_output_type: "q"
+learner: "msg_q_learner"
+double_q: True
+mixer: "flex_qmix"
+mixing_embed_dim: 32
+hypernet_embed: 128
+softmax_mixing_weights: True
+agent: "comm_imagine_entity_attend_rnn"
+rnn_hidden_dim: 64
+attn_embed_dim: 128
+attn_n_heads: 4
+lmbda: 0.5
+
+use_msg: True
+header_num: 3
+msg_dim: 3
+msg_T: 4
+msg_entropy_weight: 0
+msg_ce_weight: 0.01
+random_master: True
+ceb_weight: 0.01
+ceb_kl_weight: 0.01
+generation_alpha: 1.0
+use_comm_sr: False
+no_summary: False
+no_feedback: False
+order_leader: False
+select_by_prob: False
+k_step: 9
+only_use_head_msg: 0
+exploration:
+  threshold: 0.975
+use_leader_comm: True
+use_balanced_group: 1
+use_explore_map: 1
+adversarial_influence:
+  enable: True
+  integration_mode: "mask_only"
+  consider_in_reachability: True
+  use_k_step_constraint: True
+  debug_reachability: True
+  log_influence_stats: True
+  mask_update_frequency: 1
+
+  opponent_learning_rate: 0.001
+  opponent_update_frequency: 100
+  experience_buffer_size: 10000
+  batch_size: 32
+
+  influence_range: 5.0
+  base_influence_strength: 2.0
+  influence_decay_rate: 0.3
+  
+
+  weakening_range: 3.0
+  base_weakening_strength: 0.3
+  weakening_decay_rate: 0.5
+
+  cost_multiplier: 1.5
+
+  visualization:
+    enable_heatmap: False
+    save_gif: False
+    save_average: False
+    start_episode: 0
+    save_interval: 1
+    average_interval: 1
+    save_dir: "adversarial_heatmaps"
+    map_size: [32, 32]
+    dpi: 150
+
+  enable_debug_logging: False
+  debug_log_frequency: 50
+
+env_args:
+  fixed_m: 12

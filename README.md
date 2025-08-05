@@ -1,5 +1,7 @@
 # Project Description
 
+Complete code and models have been uploaded to https://github.com/Unknow479441/IA-KRC_Source_Code_AAAI_26.git
+
 ## 1. Environment Requirements
 
 ### System Requirements
